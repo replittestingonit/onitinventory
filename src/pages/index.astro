@@ -1,0 +1,670 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RoiCalculator from '../components/RoiCalculator';
+
+const title = "ONIT Security - Prevent Unexplained Inventory Loss";
+const description = "Stop retail shrinkage and unexplained inventory loss in real-time. Apply an automated chain of custody to your Shopify inventory.";
+
+const styles = {
+  header: {
+    padding: '20px 0',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    position: 'sticky' as const,
+    top: 0,
+    backgroundColor: 'rgba(3, 3, 3, 0.8)',
+    backdropFilter: 'blur(12px)',
+    zIndex: 100,
+  },
+  headerContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  logoRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+  },
+  logoText: {
+    fontSize: '1.25rem',
+    fontWeight: '800',
+    fontFamily: 'Outfit, sans-serif',
+    letterSpacing: '0.05em',
+  },
+  nav: {
+    display: 'flex',
+    gap: '24px',
+  },
+  navLink: {
+    color: '#9ca3af',
+    fontSize: '0.95rem',
+    fontWeight: '500',
+    transition: 'color 0.2s',
+  },
+  headerBtn: {
+    fontSize: '0.85rem',
+    padding: '8px 16px',
+  },
+  heroSection: {
+    padding: '80px 0 100px 0',
+    textAlign: 'center' as const,
+    position: 'relative' as const,
+  },
+  heroContainer: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    gap: '24px',
+  },
+  badge: {
+    padding: '6px 14px',
+    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+    border: '1px solid rgba(99, 102, 241, 0.3)',
+    borderRadius: '20px',
+    fontSize: '0.8rem',
+    fontWeight: '700',
+    letterSpacing: '0.05em',
+    color: '#a5b4fc',
+  },
+  heroHeadline: {
+    fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+    lineHeight: '1.1',
+    fontWeight: '800',
+  },
+  heroSubhead: {
+    fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+    color: '#9ca3af',
+    maxWidth: '750px',
+    lineHeight: '1.6',
+  },
+  heroActions: {
+    display: 'flex',
+    gap: '16px',
+    marginBlock: '12px',
+    flexWrap: 'wrap' as const,
+    justifyContent: 'center',
+  },
+  mainCta: {
+    boxShadow: '0 0 30px rgba(16, 185, 129, 0.25)',
+  },
+  videoMockup: {
+    width: '100%',
+    maxWidth: '900px',
+    marginTop: '50px',
+    borderRadius: '16px',
+    overflow: 'hidden',
+  },
+  mockupHeader: {
+    padding: '12px 20px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+  },
+  dots: {
+    display: 'flex',
+    gap: '6px',
+  },
+  dot: {
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
+    display: 'inline-block',
+  },
+  mockupTitle: {
+    marginLeft: '20px',
+    fontSize: '0.8rem',
+    color: '#6b7280',
+    fontWeight: '500',
+  },
+  videoContent: {
+    position: 'relative' as const,
+    aspectRatio: '16/9',
+    backgroundColor: '#09090b',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundImage: 'radial-gradient(circle at center, rgba(99, 102, 241, 0.08) 0%, transparent 70%)',
+  },
+  graphMock: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '12px',
+    opacity: 0.25,
+    textAlign: 'left' as const,
+    width: '80%',
+  },
+  chartLineRecorded: {
+    height: '2px',
+    backgroundColor: '#fbbf24',
+    position: 'relative' as const,
+    fontSize: '0.75rem',
+    color: '#fbbf24',
+    paddingBottom: '15px',
+  },
+  chartLineActual: {
+    height: '2px',
+    backgroundColor: '#10b981',
+    position: 'relative' as const,
+    fontSize: '0.75rem',
+    color: '#10b981',
+    paddingBottom: '15px',
+  },
+  discrepancyArea: {
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    border: '1px dashed #ef4444',
+    padding: '12px',
+    borderRadius: '6px',
+    fontSize: '0.8rem',
+    color: '#ef4444',
+  },
+  playOverlay: {
+    position: 'absolute' as const,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    gap: '12px',
+    transition: 'transform 0.2s',
+  },
+  playCircle: {
+    width: '70px',
+    height: '70px',
+    borderRadius: '50%',
+    backgroundColor: '#6366f1',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxShadow: '0 0 25px rgba(99, 102, 241, 0.5)',
+  },
+  playText: {
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    color: '#ffffff',
+  },
+  statsSection: {
+    padding: '40px 0',
+    borderBlock: '1px solid rgba(255, 255, 255, 0.05)',
+    backgroundColor: 'rgba(255, 255, 255, 0.01)',
+  },
+  statsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '40px',
+    textAlign: 'center' as const,
+  },
+  statCard: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '8px',
+  },
+  statNumber: {
+    fontSize: '3rem',
+    fontWeight: '800',
+    fontFamily: 'Outfit, sans-serif',
+  },
+  statLabel: {
+    fontSize: '0.9rem',
+    color: '#9ca3af',
+  },
+  section: {
+    padding: '100px 0',
+  },
+  darkSection: {
+    padding: '100px 0',
+    backgroundColor: 'rgba(255, 255, 255, 0.01)',
+  },
+  sectionHeader: {
+    textAlign: 'center' as const,
+    maxWidth: '700px',
+    margin: '0 auto 60px auto',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '12px',
+  },
+  sectionTitle: {
+    fontSize: '2.25rem',
+    fontWeight: '750',
+  },
+  sectionSubtitle: {
+    fontSize: '1.05rem',
+    color: '#9ca3af',
+  },
+  featuresGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '24px',
+  },
+  featureCard: {
+    padding: '30px',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '16px',
+    borderRadius: '16px',
+  },
+  featureIconBox: {
+    width: '48px',
+    height: '48px',
+    borderRadius: '10px',
+    backgroundColor: 'rgba(255,255,255,0.03)',
+    border: '1px solid rgba(255,255,255,0.05)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  featureName: {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+  },
+  featureDesc: {
+    fontSize: '0.92rem',
+    color: '#9ca3af',
+    lineHeight: '1.6',
+  },
+  faqContainer: {
+    maxWidth: '800px',
+  },
+  faqList: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '20px',
+  },
+  faqItem: {
+    padding: '24px 30px',
+    borderRadius: '12px',
+    textAlign: 'left' as const,
+  },
+  faqQuestion: {
+    fontSize: '1.15rem',
+    fontWeight: '600',
+    color: '#ffffff',
+    marginBottom: '10px',
+  },
+  faqAnswer: {
+    fontSize: '0.95rem',
+    color: '#9ca3af',
+    lineHeight: '1.6',
+  },
+  footer: {
+    padding: '60px 0 40px 0',
+    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+    backgroundColor: '#010101',
+  },
+  footerContainer: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    gap: '24px',
+    textAlign: 'center' as const,
+  },
+  footerTagline: {
+    color: '#6b7280',
+    fontSize: '0.85rem',
+    marginTop: '6px',
+  },
+  footerCopy: {
+    fontSize: '0.8rem',
+    color: '#4b5563',
+  },
+  valuePropSection: {
+    padding: '80px 0',
+    backgroundColor: 'rgba(255, 255, 255, 0.01)',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+  },
+  valuePropContainer: {
+    display: 'flex',
+    flexDirection: 'row' as const,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '60px',
+    flexWrap: 'wrap' as const,
+  },
+  valuePropTextCol: {
+    flex: '1.2 1 400px',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '20px',
+    textAlign: 'left' as const,
+  },
+  valuePropHeader: {
+    fontSize: 'clamp(2rem, 3.5vw, 2.75rem)',
+    lineHeight: '1.2',
+    fontWeight: '800',
+  },
+  valuePropDesc: {
+    fontSize: '1.05rem',
+    color: '#9ca3af',
+    lineHeight: '1.7',
+  },
+  valuePropStatsCol: {
+    flex: '0.8 1 300px',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  valuePropStatCard: {
+    padding: '40px',
+    borderRadius: '20px',
+    backgroundColor: 'rgba(99, 102, 241, 0.03)',
+    border: '1px solid rgba(99, 102, 241, 0.1)',
+    textAlign: 'center' as const,
+    width: '100%',
+    maxWidth: '350px',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+  },
+  valuePropStatNumber: {
+    fontSize: '4rem',
+    fontWeight: '800',
+    fontFamily: 'Outfit, sans-serif',
+    display: 'block',
+  },
+  valuePropStatLabel: {
+    fontSize: '0.95rem',
+    color: '#a5b4fc',
+    fontWeight: '600',
+    marginTop: '10px',
+    lineHeight: '1.4',
+  },
+};
+---
+
+<Layout title={title} description={description}>
+	<!-- Header -->
+	<header style={styles.header}>
+		<div style={styles.headerContainer} class="container">
+			<div style={styles.logoRow}>
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+					<path d="m9 11 2 2 4-4"/>
+				</svg>
+				<span style={styles.logoText}>ONIT <span style={{color: '#6366f1'}}>SECURITY</span></span>
+			</div>
+			<nav style={styles.nav}>
+				<a href="#features" style={styles.navLink}>Features</a>
+				<a href="#calculator" style={styles.navLink}>ROI Calculator</a>
+				<a href="#faq" style={styles.navLink}>FAQ</a>
+			</nav>
+			<a href="https://apps.shopify.com" target="_blank" class="btn btn-primary" style={styles.headerBtn}>
+				Install App
+			</a>
+		</div>
+	</header>
+
+	<main>
+		<!-- Hero Section -->
+		<section style={styles.heroSection}>
+			<div class="container" style={styles.heroContainer}>
+				<span style={styles.badge} class="pulse-glow">NEW: INVENTORY LOSS PROTECTION</span>
+				<h1 style={styles.heroHeadline}>
+					Stop Unexplained <br />
+					<span class="text-gradient">Inventory Loss</span> on Shopify
+				</h1>
+				<p style={styles.heroSubhead}>
+					Traditional trackers only show static stock levels. ONIT delivers complete visibility of all transactions—Sales, Inventory In, and Inventory Out—all in one unified table. Get automated alerts of inventory anomalies in real-time to truly know the pulse of your business with less complexity and more time for your life.
+				</p>
+				
+				<div style={styles.heroActions}>
+					<a href="https://apps.shopify.com" target="_blank" class="btn btn-secure" style={styles.mainCta}>
+						Install on Shopify App Store
+					</a>
+					<a href="#demo" class="btn btn-secondary">
+						Watch Walkthrough Demo
+					</a>
+				</div>
+
+				<!-- Visual Mockup (Placeholder for Walkthrough Video) -->
+				<div id="demo" style={styles.videoMockup} class="glass-panel">
+					<div style={styles.mockupHeader}>
+						<div style={styles.dots}>
+							<span style={{...styles.dot, backgroundColor: '#ef4444'}}></span>
+							<span style={{...styles.dot, backgroundColor: '#fbbf24'}}></span>
+							<span style={{...styles.dot, backgroundColor: '#10b981'}}></span>
+						</div>
+						<div style={styles.mockupTitle}>ONIT Security: Audit Dashboard</div>
+					</div>
+					<div id="video-container" style={styles.videoContent}>
+						<div style={styles.graphMock}>
+							<div style={styles.chartLineRecorded}>Recorded Inventory (Expected Count)</div>
+							<div style={styles.chartLineActual}>Actual Inventory (Shopify Live Webhook)</div>
+							<div style={styles.discrepancyArea}>Variance Flagged (Alert Fired 🔔)</div>
+						</div>
+						<div id="play-button" style={{...styles.playOverlay, cursor: 'pointer'}}>
+							<div style={styles.playCircle}>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+									<polygon points="5 3 19 12 5 21 5 3"></polygon>
+								</svg>
+							</div>
+							<span style={styles.playText}>Play Security Walkthrough</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Statistics Banner -->
+		<section style={styles.statsSection}>
+			<div class="container" style={styles.statsGrid}>
+				<div style={styles.statCard}>
+					<span style={styles.statNumber} class="text-gradient-loss">1.6%</span>
+					<span style={styles.statLabel}>Average Retail Revenue Lost to Shrinkage Yearly</span>
+				</div>
+				<div style={styles.statCard}>
+					<span style={styles.statNumber}>65%</span>
+					<span style={styles.statLabel}>Average Drop in Shrinkage under Chain of Custody</span>
+				</div>
+				<div style={styles.statCard}>
+					<span style={styles.statNumber} class="text-gradient-secure">Daily</span>
+					<span style={styles.statLabel}>Reporting Logs Delivered Right to Your Inbox</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- Value Proposition Section: Concise Visibility & Daily Reports -->
+		<section style={styles.valuePropSection}>
+			<div class="container" style={styles.valuePropContainer}>
+				<div style={styles.valuePropTextCol}>
+					<span style={styles.badge}>COMPLETE BUSINESS TRANSPARENCY</span>
+					<h2 style={styles.valuePropHeader}>Know Your Business inside Out</h2>
+					<p style={styles.valuePropDesc}>
+						Wasting hours cross-referencing orders, fulfillments, and location logs is a thing of the past. ONIT delivers complete visibility of all transactions—Sales, Inventory In, and Inventory Out—all in one unified, clear table. Get absolute operational clarity backed by automated daily reports delivered straight to your inbox.
+					</p>
+				</div>
+				<div style={styles.valuePropStatsCol}>
+					<div style={styles.valuePropStatCard} class="glass-panel">
+						<span style={styles.valuePropStatNumber} class="text-gradient-secure">-80%</span>
+						<span style={styles.valuePropStatLabel}>Reduction in time spent cross-referencing operations</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features Grid Section -->
+		<section id="features" style={styles.section}>
+			<div class="container">
+				<div style={styles.sectionHeader}>
+					<h2 style={styles.sectionTitle}>Built for Accountability & Loss Prevention</h2>
+					<p style={styles.sectionSubtitle}>Every inventory adjustment must have an owner, a timestamp, and an audit trail.</p>
+				</div>
+
+				<div style={styles.featuresGrid} class="features-grid-custom">
+					{/* Feature 1 */}
+					<div style={styles.featureCard} class="glass-panel">
+						<div style={styles.featureIconBox}>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+							</svg>
+						</div>
+						<h3 style={styles.featureName}>Complete Transaction Visibility</h3>
+						<p style={styles.featureDesc}>
+							See all transactions—Sales, Inventory In, and Inventory Out—in a single, unified table. Instantly understand the relationship between order events and physical stock movements.
+						</p>
+					</div>
+
+					{/* Feature 2 */}
+					<div style={styles.featureCard} class="glass-panel">
+						<div style={styles.featureIconBox}>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+							</svg>
+						</div>
+						<h3 style={styles.featureName}>Silence & Save Resolution</h3>
+						<p style={styles.featureDesc}>
+							Sharing the few anomalies that occur with your staff makes everyone aware of active tracking. Knowing adjustments are monitored keeps teams on guard to do things correctly—preventing employees from trying to become unofficial partners in your profits.
+						</p>
+					</div>
+
+					{/* Feature 3 */}
+					<div style={styles.featureCard} class="glass-panel">
+						<div style={styles.featureIconBox}>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+								<line x1="12" y1="9" x2="12" y2="13"/>
+								<line x1="12" y1="17" x2="12.01" y2="17"/>
+							</svg>
+						</div>
+						<h3 style={styles.featureName}>Real-Time Alerting</h3>
+						<p style={styles.featureDesc}>
+							Instantly flags high-risk anomalies: adjustments during fringe hours, high-velocity outflow spikes, or unaccounted stock adjustments, before discrepancies slip away.
+						</p>
+					</div>
+
+					{/* Feature 4 */}
+					<div style={styles.featureCard} class="glass-panel">
+						<div style={styles.featureIconBox}>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+								<line x1="16" y1="2" x2="16" y2="6"/>
+								<line x1="8" y1="2" x2="8" y2="6"/>
+								<line x1="3" y1="10" x2="21" y2="10"/>
+							</svg>
+						</div>
+						<h3 style={styles.featureName}>Automated Daily Reports</h3>
+						<p style={styles.featureDesc}>
+							Get a clean, structured audit digest delivered to your inbox every morning. Spot anomalies and review resolved events in seconds without opening the app.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{/* Interactive ROI Calculator Section */}
+		<section id="calculator" style={styles.darkSection}>
+			<div class="container">
+				<div style={styles.sectionHeader}>
+					<h2 style={styles.sectionTitle}>Calculate Your Total Recovery ROI</h2>
+					<p style={styles.sectionSubtitle}>Discover the financial leak in your operations and see how much profit we recover. Reclaim lost revenue and reduce time spent reconciling so you can focus on business growth.</p>
+				</div>
+				<RoiCalculator client:visible />
+			</div>
+		</section>
+
+		{/* SEO FAQ Section */}
+		<section id="faq" style={styles.section}>
+			<div class="container" style={styles.faqContainer}>
+				<div style={styles.sectionHeader}>
+					<h2 style={styles.sectionTitle}>Frequently Asked Questions</h2>
+					<p style={styles.sectionSubtitle}>Direct answers about inventory audit logs, security webhooks, and loss prevention.</p>
+				</div>
+
+				<div style={styles.faqList}>
+					{/* Question 1 */}
+					<div style={styles.faqItem} class="glass-panel">
+						<h3 style={styles.faqQuestion}>Why does Shopify inventory experience discrepancy or shrink?</h3>
+						<p style={styles.faqAnswer}>
+							Shopify stores experience inventory discrepancy due to delayed API webhook syncs, manual mistakes by staff, untracked return processing, physical retail theft, and vendor delivery discrepancies. Standard trackers log the changes but don't force a resolution workflow.
+						</p>
+					</div>
+
+					{/* Question 2 */}
+					<div style={styles.faqItem} class="glass-panel">
+						<h3 style={styles.faqQuestion}>What is an inventory chain of custody?</h3>
+						<p style={styles.faqAnswer}>
+							An inventory chain of custody refers to the chronological documentation of custody, transfer, and analysis of stock units. Every stock adjustment must record the operator, shift timing, reason context, and order link so that no unit moves without a verified owner.
+						</p>
+					</div>
+
+					{/* Question 3 */}
+					<div style={styles.faqItem} class="glass-panel">
+						<h3 style={styles.faqQuestion}>How does this app protect Shopify stores from employee theft?</h3>
+						<p style={styles.faqAnswer}>
+							ONIT Security blocks internal theft by monitoring stock changes made during fringe hours (late nights, early mornings) and flagging manual correction spikes. Alerts remain active in the system until a manager silences the alert with notes or evidence.
+						</p>
+					</div>
+
+					{/* Question 4 */}
+					<div style={styles.faqItem} class="glass-panel">
+						<h3 style={styles.faqQuestion}>How do managers receive real-time alerts and daily reports?</h3>
+						<p style={styles.faqAnswer}>
+							In addition to live dashboard updates, operations managers receive instant email alerts for security rule triggers and a structured daily reporting digest detailing all stock movement actions straight to their inbox.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer style={styles.footer}>
+		<div class="container" style={styles.footerContainer}>
+			<div>
+				<span style={styles.logoText}>ONIT <span style={{color: '#6366f1'}}>SECURITY</span></span>
+				<p style={styles.footerTagline}>Secure Shopify Inventory Chain of Custody.</p>
+			</div>
+			<div style={styles.footerCopy}>
+				&copy; {new Date().getFullYear()} ONIT Security. All rights reserved. Shopify is a trademark of Shopify Inc.
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<style>
+	/* Responsive Tab Container overrides */
+	@media (max-width: 640px) {
+		:global(.tab-container) {
+			flex-direction: column !important;
+			min-height: auto !important;
+			gap: 16px;
+			margin-bottom: 20px !important;
+		}
+		:global(.inactive-tab-link) {
+			position: static !important;
+			margin-top: 4px;
+		}
+		:global(.active-title) {
+			font-size: 1.6rem !important;
+		}
+	}
+
+	@media (min-width: 768px) {
+		#features .features-grid-custom {
+			display: grid !important;
+			grid-template-columns: repeat(2, 1fr) !important;
+		}
+		
+		#calculator :global(.glass-panel) :global(div) {
+			grid-template-columns: 1.2fr 0.8fr !important;
+		}
+	}
+	
+	@media (min-width: 1024px) {
+		#features .features-grid-custom {
+			grid-template-columns: repeat(4, 1fr) !important;
+		}
+	}
+</style>
+
+<script>
+	const playButton = document.getElementById('play-button');
+	const videoContainer = document.getElementById('video-container');
+	if (playButton && videoContainer) {
+		playButton.addEventListener('click', () => {
+			videoContainer.innerHTML = `
+				<video 
+					src="/security-walkthrough.mp4" 
+					controls 
+					autoplay 
+					style="width: 100%; height: 100%; object-fit: contain; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; outline: none; background: #000;"
+				></video>
+			`;
+		});
+	}
+</script>

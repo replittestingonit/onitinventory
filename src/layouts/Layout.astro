@@ -1,0 +1,84 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string;
+}
+
+const {
+	title = "ONIT Security - Inventory Chain of Custody App",
+	description = "Prevent retail shrinkage and unexplained inventory loss in real-time. Apply a secure chain of custody to your Shopify store inventory.",
+	keywords = "Shopify inventory audit trail, retail shrinkage tracker, reconcile Shopify inventory, prevent employee theft Shopify, inventory discrepancy log"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://shopifyprotection.com");
+const ogImageURL = "https://shopifyprotection.com/images/og-meta-banner.png";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Meta Tags -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Primary SEO -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:site_name" content="ONIT Security" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={ogImageURL} />
+
+		<!-- Icons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+
+		<!-- JSON-LD Structured Data for Search Engine & LLM Crawlers -->
+		<script type="application/ld+json" is:inline>
+			{
+				"@context": "https://schema.org",
+				"@type": "SoftwareApplication",
+				"name": "ONIT Security",
+				"operatingSystem": "Web-based / Shopify Admin App",
+				"applicationCategory": "BusinessApplication",
+				"applicationSubCategory": "Inventory and Loss Prevention",
+				"offers": {
+					"@type": "Offer",
+					"price": "0.00",
+					"priceCurrency": "USD",
+					"description": "Free trial available. Competitive tiered pricing based on order volume."
+				},
+				"description": "An inventory chain of custody security solution for Shopify merchants. Tracks all inventory adjustments in real-time, monitors fringe shift hours, flags manual spikes, and reduces retail shrinkage.",
+				"featureList": [
+					"Real-time inventory discrepancy graph",
+					"Chain of custody activity timeline logs",
+					"Silence & Save resolution workflow for inventory discrepancies",
+					"Real-time alerting for fringe shifts and manual correction spikes",
+					"Daily automated inventory reporting digests delivered straight to your inbox"
+				]
+			}
+		</script>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
