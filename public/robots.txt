@@ -22,4 +22,4 @@ User-agent: facebookexternalhit
 Allow: /
 
 # Sitemap path
-Sitemap: https://shopifyprotection.com/sitemap-index.xml
+Sitemap: https://onitinventory.com/sitemap-index.xml

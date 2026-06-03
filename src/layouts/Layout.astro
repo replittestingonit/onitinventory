@@ -13,8 +13,8 @@ const {
 	keywords = "Shopify inventory audit trail, retail shrinkage tracker, reconcile Shopify inventory, prevent employee theft Shopify, inventory discrepancy log"
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, "https://shopifyprotection.com");
-const ogImageURL = "https://shopifyprotection.com/images/og-meta-banner.png";
+const canonicalURL = new URL(Astro.url.pathname, "https://onitinventory.com");
+const ogImageURL = "https://onitinventory.com/images/og-meta-banner.png";
 ---
 
 <!doctype html>
@@ -58,6 +58,10 @@ const ogImageURL = "https://shopifyprotection.com/images/og-meta-banner.png";
 				"@context": "https://schema.org",
 				"@type": "SoftwareApplication",
 				"name": "ONIT Security",
+				"url": "https://onitinventory.com",
+				"sameAs": [
+					"https://apps.shopify.com/onit-security"
+				],
 				"operatingSystem": "Web-based / Shopify Admin App",
 				"applicationCategory": "BusinessApplication",
 				"applicationSubCategory": "Inventory and Loss Prevention",
