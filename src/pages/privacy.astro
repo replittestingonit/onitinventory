@@ -1,0 +1,256 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Privacy Policy — ONIT Security";
+const description = "Privacy Policy for ONIT Security, the Shopify inventory chain of custody and loss prevention application by ONIT Global, Inc.";
+---
+
+<Layout title={title} description={description}>
+	<!-- Header (matches index.astro) -->
+	<header style={{
+		padding: '20px 0',
+		borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+		position: 'sticky' as const,
+		top: 0,
+		backgroundColor: 'rgba(3, 3, 3, 0.8)',
+		backdropFilter: 'blur(12px)',
+		zIndex: 100,
+	}}>
+		<div class="container" style={{
+			display: 'flex',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+		}}>
+			<a href="/" style={{
+				display: 'flex',
+				alignItems: 'center',
+				gap: '10px',
+			}}>
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+					<path d="m9 11 2 2 4-4"/>
+				</svg>
+				<span style={{
+					fontSize: '1.25rem',
+					fontWeight: '800',
+					fontFamily: 'Outfit, sans-serif',
+					letterSpacing: '0.05em',
+				}}>ONIT <span style={{color: '#6366f1'}}>SECURITY</span></span>
+			</a>
+			<a href="/" style={{
+				color: '#9ca3af',
+				fontSize: '0.95rem',
+				fontWeight: '500',
+				transition: 'color 0.2s',
+			}}>← Back to Home</a>
+		</div>
+	</header>
+
+	<main>
+		<!-- Hero -->
+		<section style={{
+			padding: '80px 0 40px 0',
+			textAlign: 'center' as const,
+		}}>
+			<div class="container" style={{
+				display: 'flex',
+				flexDirection: 'column' as const,
+				alignItems: 'center',
+				gap: '16px',
+			}}>
+				<span style={{
+					padding: '6px 14px',
+					backgroundColor: 'rgba(99, 102, 241, 0.1)',
+					border: '1px solid rgba(99, 102, 241, 0.3)',
+					borderRadius: '20px',
+					fontSize: '0.8rem',
+					fontWeight: '700',
+					letterSpacing: '0.05em',
+					color: '#a5b4fc',
+				}}>ONIT GLOBAL, INC.</span>
+				<h1 style={{
+					fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+					lineHeight: '1.1',
+					fontWeight: '800',
+				}}>Privacy Policy</h1>
+				<p style={{
+					fontSize: '1rem',
+					color: '#9ca3af',
+					maxWidth: '600px',
+				}}>
+					Effective Date: June 1, 2026 &nbsp;·&nbsp; Last Updated: June 1, 2026
+				</p>
+			</div>
+		</section>
+
+		<!-- Privacy Content -->
+		<section style={{
+			padding: '40px 0 100px 0',
+		}}>
+			<div class="container" style={{ maxWidth: '800px' }}>
+				<div class="glass-panel" style={{
+					padding: '40px',
+					borderRadius: '16px',
+				}}>
+					<div class="privacy-content">
+						<h2>1. Overview</h2>
+						<p>
+							ONIT Security ("the App", "we", "us", or "our") is a Shopify application published by <strong>ONIT Global, Inc.</strong> that provides inventory protection and security monitoring for Shopify merchants. This Privacy Policy explains what data we collect, how we use it, how long we retain it, and your rights as a merchant or end customer.
+						</p>
+						<p>
+							By installing ONIT Security from the Shopify App Store, you ("Merchant") agree to the terms of this Privacy Policy.
+						</p>
+
+						<h2>2. What Data We Collect</h2>
+						<p>
+							ONIT Security collects only the minimum data necessary to provide its inventory monitoring service. We do <strong>not</strong> collect, store, or display customer names, email addresses, mailing addresses, phone numbers, or payment information.
+						</p>
+						<p>Data collected from Shopify via API and Webhooks:</p>
+						<ul>
+							<li><strong>Inventory levels:</strong> Product SKU, quantity on hand, location — for detecting stock changes.</li>
+							<li><strong>Inventory adjustments:</strong> Delta values, adjustment reason, timestamp — for classifying events (sale, restock, manual).</li>
+							<li><strong>Order identifiers:</strong> Shopify Order ID, line item quantities — for reconciling inventory decrements with legitimate sales.</li>
+							<li><strong>Fulfillment identifiers:</strong> Shopify Fulfillment ID, fulfilled quantities — for confirming shipment events against inventory changes.</li>
+							<li><strong>Product metadata:</strong> Product title, variant title, inventory item ID — for displaying meaningful event descriptions in your dashboard.</li>
+							<li><strong>Shop configuration:</strong> Store name, plan type, timezone — for configuring reports and off-hours alerts correctly.</li>
+							<li><strong>Merchant email address:</strong> The email on your Shopify account — for sending your daily inventory report.</li>
+						</ul>
+						<p>We do <strong>not</strong> collect: customer names, emails, addresses, phone numbers, payment information, customer browsing data, or any data from your customers' storefronts.</p>
+
+						<h2>3. How We Use the Data</h2>
+						<p>We use data solely to provide the ONIT Security service:</p>
+						<ul>
+							<li><strong>Store management:</strong> Tracking inventory level changes across your Shopify locations in real time.</li>
+							<li><strong>Security monitoring:</strong> Detecting unauthorized or unexplained inventory adjustments and generating alerts.</li>
+							<li><strong>Order reconciliation:</strong> Matching inventory decrements to legitimate order and fulfillment events to distinguish sales from theft or shrinkage.</li>
+							<li><strong>Reporting:</strong> Generating daily and on-demand inventory security reports delivered to your merchant email.</li>
+							<li><strong>Billing:</strong> Tracking transaction volume against your subscription plan limits.</li>
+						</ul>
+						<p>We do <strong>not</strong> use your data for advertising, marketing to your customers, training AI models, or any purpose beyond providing the service you subscribed to.</p>
+
+						<h2>4. Data Retention</h2>
+						<p>We retain data only for as long as necessary to provide the service:</p>
+						<ul>
+							<li><strong>Inventory events:</strong> 6 months from the event date</li>
+							<li><strong>Order receipt records:</strong> 90 days from the order date</li>
+							<li><strong>Security alerts (resolved/dismissed):</strong> 90 days after resolution</li>
+							<li><strong>Completed background job records:</strong> 7 days after completion</li>
+							<li><strong>All merchant data:</strong> Deleted within 48 hours of app uninstall</li>
+						</ul>
+						<p>Baseline "Initial Sync Snapshot" records are retained for the lifetime of the app installation to provide accurate delta calculations.</p>
+
+						<h2>5. Data Sharing and Third Parties</h2>
+						<p>We do <strong>not</strong> sell, rent, or trade your data or your customers' data to any third party. We share limited data with trusted service providers solely to operate the App:</p>
+						<ul>
+							<li><strong>Contabo GmbH</strong> (server hosting, EU-based) — all app data stored on encrypted servers</li>
+							<li><strong>Resend</strong> (transactional email) — merchant email address and report content</li>
+							<li><strong>Shopify</strong> (app platform) — authentication tokens and webhook processing</li>
+						</ul>
+
+						<h2>6. Data Security</h2>
+						<ul>
+							<li><strong>Encryption in transit:</strong> All data uses TLS 1.2+ (HTTPS)</li>
+							<li><strong>Encryption at rest:</strong> AES-256 hardware-level disk encryption on all servers</li>
+							<li><strong>Authentication:</strong> Valid Shopify OAuth session required for all data access</li>
+							<li><strong>Webhook validation:</strong> HMAC-SHA256 signature verification on all incoming webhooks</li>
+						</ul>
+
+						<h2>7. GDPR and Privacy Law Compliance</h2>
+						<p>ONIT Security complies with GDPR (EU), CCPA (California), and Shopify's mandatory privacy requirements. We respond to Shopify's mandatory privacy webhooks for customer data requests, customer data deletion, and shop data deletion. Upon app uninstall, all store data is permanently deleted within 48 hours.</p>
+
+						<h2>8. Your Rights as a Merchant</h2>
+						<p>You have the right to access, delete, export, or correct data we hold about your store. To exercise these rights, contact us at <a href="mailto:privacy@onitnetworking.com" style={{color: '#6366f1'}}>privacy@onitnetworking.com</a>.</p>
+
+						<h2>9. Children's Privacy</h2>
+						<p>ONIT Security is a business-to-business application intended for Shopify merchants. We do not knowingly collect any data from individuals under the age of 18.</p>
+
+						<h2>10. Changes to This Policy</h2>
+						<p>We may update this Privacy Policy from time to time. The "Last Updated" date at the top of this page will reflect changes. For material changes, we will notify merchants via the App's in-app notification system or by email.</p>
+
+						<h2>11. Contact Us</h2>
+						<p>
+							<strong>ONIT Global, Inc.</strong><br/>
+							Email: <a href="mailto:privacy@onitnetworking.com" style={{color: '#6366f1'}}>privacy@onitnetworking.com</a><br/>
+							Website: <a href="https://onitinventory.com" style={{color: '#6366f1'}}>onitinventory.com</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer style={{
+		padding: '60px 0 40px 0',
+		borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+		backgroundColor: '#010101',
+	}}>
+		<div class="container" style={{
+			display: 'flex',
+			flexDirection: 'column' as const,
+			alignItems: 'center',
+			gap: '24px',
+			textAlign: 'center' as const,
+		}}>
+			<div>
+				<span style={{
+					fontSize: '1.25rem',
+					fontWeight: '800',
+					fontFamily: 'Outfit, sans-serif',
+					letterSpacing: '0.05em',
+				}}>ONIT <span style={{color: '#6366f1'}}>SECURITY</span></span>
+				<p style={{color: '#6b7280', fontSize: '0.85rem', marginTop: '6px'}}>Secure Shopify Inventory Chain of Custody.</p>
+			</div>
+			<div style={{display: 'flex', gap: '24px', fontSize: '0.8rem', color: '#4b5563'}}>
+				<a href="/privacy" style={{color: '#6366f1'}}>Privacy Policy</a>
+			</div>
+			<div style={{fontSize: '0.8rem', color: '#4b5563'}}>
+				&copy; {new Date().getFullYear()} ONIT Security. All rights reserved. Shopify is a trademark of Shopify Inc.
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<style>
+	.privacy-content h2 {
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: #ffffff;
+		margin-top: 36px;
+		margin-bottom: 12px;
+		padding-bottom: 8px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	}
+
+	.privacy-content h2:first-child {
+		margin-top: 0;
+	}
+
+	.privacy-content p {
+		font-size: 0.95rem;
+		color: #9ca3af;
+		line-height: 1.75;
+		margin-bottom: 16px;
+	}
+
+	.privacy-content ul {
+		margin-bottom: 16px;
+		padding-left: 20px;
+	}
+
+	.privacy-content li {
+		font-size: 0.92rem;
+		color: #9ca3af;
+		line-height: 1.7;
+		margin-bottom: 8px;
+	}
+
+	.privacy-content strong {
+		color: #e5e7eb;
+	}
+
+	.privacy-content a:hover {
+		color: #818cf8;
+		text-decoration: underline;
+	}
+</style>
