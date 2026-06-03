@@ -182,7 +182,7 @@ export default function RoiCalculator() {
             </div>
 
             <div style={styles.ctaWrapper}>
-              <a href="https://apps.shopify.com" target="_blank" style={styles.ctaButton} className="btn btn-secure">
+              <a href="https://apps.shopify.com/onit-security" target="_blank" style={styles.ctaButton} className="btn btn-secure">
                 Save {formatCurrency(netSavings)}/yr — Start Protecting Your Store
               </a>
             </div>
@@ -305,7 +305,7 @@ export default function RoiCalculator() {
             </div>
 
             <div style={styles.ctaWrapper}>
-              <a href="https://apps.shopify.com" target="_blank" style={styles.ctaButton} className="btn btn-secure">
+              <a href="https://apps.shopify.com/onit-security" target="_blank" style={styles.ctaButton} className="btn btn-secure">
                 Reclaim {Math.round(annualHoursSaved)} Hours/yr — Start Saving Time
               </a>
             </div>
