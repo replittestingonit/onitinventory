@@ -33,9 +33,22 @@ const ogImageURL = "https://onitinventory.com/images/og-meta-banner.png";
 		<link rel="canonical" href={canonicalURL} />
 		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
+		<!-- Global & Regional English GEO Targeting -->
+		<link rel="alternate" hreflang="en" href={canonicalURL} />
+		<link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale:alternate" content="en_GB" />
+		<meta property="og:locale:alternate" content="en_CA" />
+		<meta property="og:locale:alternate" content="en_AU" />
+		<meta property="og:locale:alternate" content="en_NZ" />
+		<meta property="og:locale:alternate" content="en_IE" />
+		<meta property="og:locale:alternate" content="en_ZA" />
+		<meta property="og:locale:alternate" content="en_SG" />
+		<meta property="og:locale:alternate" content="en_IN" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImageURL} />
